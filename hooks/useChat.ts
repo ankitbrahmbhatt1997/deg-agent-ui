@@ -88,29 +88,29 @@ export function useChat() {
         // console.log("🔑 Authorization header:", `Bearer ${token?.substring(0, 20)}...`)
 
         // --- OLD (kept for context)
-        // const response = await fetch("https://api-deg-agents.becknprotocol.io/api/ai/chat", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Authorization: `Bearer ${token}`,   // ⬅️  removed
-        //   },
-        //   body: JSON.stringify(requestPayload),
-        // })
-
-        // --- NEW ---
-        const chatUrl =
-          "https://api-deg-agents.becknprotocol.io/api/ai/chat" + `?access_token=${encodeURIComponent(token ?? "")}`
-
-        console.log("🌐 Final chat URL:", chatUrl)
-
-        const response = await fetch(chatUrl, {
+        const response = await fetch("https://api-deg-agents.becknprotocol.io/api/ai/chat", {
           method: "POST",
-          // Only a *simple* header -> avoids CORS pre-flight issues
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,   // ⬅️  removed
           },
           body: JSON.stringify(requestPayload),
         })
+
+        // --- NEW ---
+        // const chatUrl =
+        //   "https://api-deg-agents.becknprotocol.io/api/ai/chat" + `?access_token=${encodeURIComponent(token ?? "")}`
+
+        // console.log("🌐 Final chat URL:", chatUrl)
+
+        // const response = await fetch(chatUrl, {
+        //   method: "POST",
+        //   // Only a *simple* header -> avoids CORS pre-flight issues
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(requestPayload),
+        // })
 
         console.log("📥 Response status:", response.status)
         console.log("📥 Response ok:", response.ok)
